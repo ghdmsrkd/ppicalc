@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset = "UTF-8">
+		<meta  name = "viewport" content="width-device-width", initial-scale = "1">
+		<title>ppi calculater</title>
+		<link rel = "stylesheet" href = "css/bootstrap.css">
+		<link rel = "stylesheet" href = "css/ppiCalc.css">
+		
+		<!-- ppi 계산하는 스크립트 -->
+		<script>
+	
+		function getRes() {	//페이지 로드시 리셋 함수
+			dpiCalculator.x.value = screen.width;
+			dpiCalculator.y.value = screen.height;
+			dpiCalculator.z.focus();
+			remenberPPI = 0;	// 로드시 오류 출력을 위한 전역변수 세팅
+			getBtnValue('p');
+		}
+		
+		function dpiCalc(form) {
+			var x = form.x.value;
+			var y = form.y.value; 
+			if (x == 0 || y == 0) return; 
+			var z = form.z.value;
+			//alert(x+"\\"+y+"\\"+z);
+			document.getElementById('zMetric').firstChild.data = rnd2(z * 2.54);
+			ppi = (Math.sqrt((x * x) + (y * y))) / z; dotmm = (x / ((Math.sqrt((x * x) + (y * y))) / (z * 25.4))) / x;
+			var ratio = y/x;
+			var xd = Math.sqrt( Math.pow(z,2) / ( 1 + Math.pow(ratio, 2) ));
+			var yd = xd * ratio;
+			document.getElementById("dpi").innerHTML = rnd2(ppi);
+			//alert(document.getElementById("dpi").value);
+			document.getElementById("dotPitch").innerHTML = Math.round(dotmm * 10000)/10000 + ' mm';
+			document.getElementById("displaySize").innerHTML = rnd2(xd) + '" &times; ' + rnd2(yd) + '"';
+			document.getElementById("displaySizeMetric").innerHTML = rnd2(2.54*xd) + ' cm &times; ' + rnd2(2.54*yd) + ' cm';
+			document.getElementById("aspectRatioFraction").innerHTML = fy(x, y);
+			document.getElementById("aspectRatio").innerHTML = rnd2(x/y) + ':1';
+			document.getElementById("pixelCount").innerHTML = addCommas(x*y);
+			//document.getElementById("megapixels").innerHTML = rnd2((x*y)/1000000) + ' MP';
+			
+			//전역변수 remenberPPI 세팅
+			setPPI(rnd2(ppi));
+			isInfinity(rnd2(ppi));	//무한대일시 처리
+			//제품 비교 부분 세팅
+			compareWithFamous();
+			
+		}
+		function rnd2 (n) { 
+			return Math.round(n * 100) / 100;
+		}
+		function addCommas(nStr) {
+			nStr += '';
+			x = nStr.split('.');
+			x1 = x[0];
+			x2 = x.length > 1 ? '.' + x[1] : '';
+			var rgx = /(\d+)(\d{3})/;
+			while (rgx.test(x1)) {
+				x1 = x1.replace(rgx, '$1' + ',' + '$2');
+			}
+			return x1 + x2;
+		}
+		function fy(xn, yd) {
+			if ( xn == 0 || yd == 0 ) { return; }
+			xn = Math.abs( xn ); yd = Math.abs( yd ); var f = 1;
+			for ( var x = 2; x <= Math.min( xn, yd ); x ++ ) { var check1 = xn / x;
+				if ( check1 == Math.round( check1 ) ) { var check2 = yd / x;
+					if ( check2 == Math.round( check2 ) ) { f = x; }
+				}
+			}
+			xn=xn/f; yd=yd/f;
+			return xn + " &times; " + yd;
+		}
+		
+		//ppi점수가 무한대인지 아는지 계산
+		function isInfinity(ppi) {
+			if(rnd2(ppi) == Infinity){ //무제한 값 나올때
+				document.getElementById("dpi").innerHTML = 0;
+				setPPI(0);
+			}
+		}
+		
+	</script>
+	<!-- 디바이스 선택 하는 스크립트 -->
+	<script>
+	
+		function getBtnValue(bv) { //button value
+			//alert(bv);
+			setBV(bv); //전역변수 remenberBV 세팅
+			//제품 비교 부분 세팅
+			compareWithFamous();
+			switch (bv) {
+				case 'p' :
+					document.getElementById("strProduct").innerHTML = '스마트폰';
+					document.getElementById("strRank").innerHTML = '806.93   Sony Xperia XZ Premium<br/>801.06   Sony Xperia Z5 Premium<br/>575.92   Samsung Galaxy S6<br/>75.92   Samsung Galaxy S6 Edge<br/>575.92   Samsung Galaxy S7<br/>567.53   Samsung Galaxy S8<br/>567.53   Samsung Galaxy S9<br/>564.90   LG G6<br/>564.85   Microsoft Lumia 950<br/>564.85   HTC 10';
+					
+					break;
+				case 't' :
+					document.getElementById("strProduct").innerHTML = '테블릿';
+					document.getElementById("strRank").innerHTML ='359.39	Samsung Galaxy Tab Pro 8.4<br/>359.39	Samsung Galaxy Tab S 8.4<br/>359.39	Dell Venue 8 7840<br/>352.47	Dell Latitude 12 7000 (7275)<br/>339.20	Amazon Kindle Fire HDX 8.9″<br/>324.05	Apple iPad Mini (2nd Generation)<br/>323.45	Google Nexus 7 (2013)<br/>323.45	Amazon Kindle Fire HDX<br/>320.00	Samsung Galaxy Tab S2 8.0<br/>320.00	Asus ZenPad S 8.0<br/>';
+					break;
+				case 'l' :
+					document.getElementById("strProduct").innerHTML = '랩탑';
+					document.getElementById("strRank").innerHTML ='352.47	HP EliteBook Folio G1 (Skylake 4K)<br/>352.47	Dell Latitude 12 7000 (7275)<br/>331.26	Dell XPS 13 (9370)<br/>316.97	Lenovo Yoga 920<br/>288.44	Lenovo Miix 720<br/>282.42	Toshiba Satellite P55t<br/>282.42	Dell Precision 5520<br/>282.42	Lenovo X1 Extreme (4K)<br/>276.05	Samsung ATIV Book 9 Plus<br/>276.05	Samsung ATIV Q<br/>';
+					break;
+				case 'm' :
+					document.getElementById("strProduct").innerHTML = '모니터';
+					document.getElementById("strRank").innerHTML ='279.73	Dell UP3218K<br/>	218.58	LG UltraFine 4K Display<br/>	217.57	Dell UltraSharp 27 Ultra HD 5K Monitor<br/>	217.57	LG UltraFine 5K Display<br/>	217.57	HP Z27q<br/>	217.57	Dell UP2715K<br/>	203.98	IBM T221	2001<br/>	203.98	Viewsonic VP2290b<br/>	193.15	Microsoft Surface Studio<br/>	183.58	Dell UP2414Q	';
+					break;
+			  default:
+				  alert('제품문자열 출력 오류');
+			}
+			
+		}
+	</script>
+	<!-- 인기 제품과 비교해주는 스크립트 -->
+	<script>
+		var remenberBV;	//버튼의 값을 기억하는 전역 변수
+		var remenberPPI; //ppi의 값을 기억하는 전역 변수
+		
+		function setBV(bv) {	//전역변수 remenberBV 세팅	
+			remenberBV = bv;
+			//alert(remenberBV);
+		}
+		
+		function setPPI(ppi) {	//전역변수 remenberPPI 세팅
+			remenberPPI = Math.round(ppi);
+			//alert(ppi);
+		}
+		//인기의 제품과 ppi값을 비교해주는 함수
+		function compareWithFamous(){
+			//alert(remenberPPI);
+			var tmpppi;
+			switch (remenberBV) {
+			case 'p':
+				document.getElementById("strCompareDevice").innerHTML = 'iPhone XR 6.1(inch)';
+				tmpppi = remenberPPI - 326;
+				//alert(tmpppi);
+				if(tmpppi > 0){
+					document.getElementById("strCompareHeightLow").innerHTML = "높";
+					document.getElementById("strCompareRemain").innerHTML = tmpppi;
+				}
+				else{
+					document.getElementById("strCompareHeightLow").innerHTML = "낮";
+					document.getElementById("strCompareRemain").innerHTML = tmpppi * -1;
+				}
+				break;
+			case 't':
+				document.getElementById("strCompareDevice").innerHTML = 'iPad Pro 12.9(inch)';
+				tmpppi = remenberPPI - 264;
+				if(tmpppi > 0){
+					document.getElementById("strCompareHeightLow").innerHTML = "높";
+					document.getElementById("strCompareRemain").innerHTML = tmpppi;
+				}
+				else{
+					document.getElementById("strCompareHeightLow").innerHTML = "낮";
+					document.getElementById("strCompareRemain").innerHTML = tmpppi * -1;
+				}
+				break;
+			case 'l':
+				document.getElementById("strCompareDevice").innerHTML = 'Macbook Pro 15(inch)';
+				tmpppi = remenberPPI - 227;
+				if(tmpppi > 0){
+					document.getElementById("strCompareHeightLow").innerHTML = "높";
+					document.getElementById("strCompareRemain").innerHTML = tmpppi;
+				}
+				else{
+					document.getElementById("strCompareHeightLow").innerHTML = "낮";
+					document.getElementById("strCompareRemain").innerHTML = tmpppi * -1;
+				}
+				break;
+			case 'm':
+				document.getElementById("strCompareDevice").innerHTML = 'iMac Pro 27(inch)';
+				tmpppi = remenberPPI - 218;
+				if(tmpppi > 0){
+					document.getElementById("strCompareHeightLow").innerHTML = "높";
+					document.getElementById("strCompareRemain").innerHTML = tmpppi;
+				}
+				else{
+					document.getElementById("strCompareHeightLow").innerHTML = "낮";
+					document.getElementById("strCompareRemain").innerHTML = tmpppi * -1;
+				}
+				break;
+			default:
+				alert('비교 제품 문자열 오류');
+				break;
+			}
+		}
+	
+	</script>
+	<!-- 셀렉트 박스에서 샌택한 값을 해상도와 인치 input 상자에 값을 전달해주는 부분 -->
+	<script>
+		function setResolutionBox() {
+			var itemIdSelect = document.getElementById("resolution").value;
+			var strsplit = itemIdSelect.split("x");
+			document.getElementById("resolutionHorizen").value = strsplit[0];
+			document.getElementById("resolutionVertical").value = strsplit[1];
+			setDpiCalculator();
+			dpiCalc(dpiCalculator);
+		}
+		
+		function setInchBox() {
+			var itemIdSelect = document.getElementById("inch").value;
+			document.getElementById("inchInput").value = itemIdSelect;
+			setDpiCalculator();
+			dpiCalc(dpiCalculator);
+		}
+		
+		function setDpiCalculator() {
+			dpiCalculator.x.value = document.getElementById("resolutionHorizen").value
+			dpiCalculator.y.value = document.getElementById("resolutionVertical").value
+			dpiCalculator.z.value = document.getElementById("inchInput").value
+		}
+	</script>
+	
+	</head>
+	<body onload="getRes()">
+	
+	<!-- 로고랑 토글네비바 -->
+	<nav class="navbar navbar-default">
+		
+		<!-- 로고 스타일 -->
+      <style type="text/css">
+      	.navbar-brand {
+      		background-image: url('images/logo.png');
+      		background-size: cover;
+      		width: 100px;
+       	}
+      </style>
+      <!-- 네비개이션 박스 -->
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+          	data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><span class="container"></span></a>
+        </div>
+        
+    	<!-- 버튼들 -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav" >
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+              	role="button" aria-haspopup="true" aria-expanded="false">P&K <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="http://www.pkcs16.com:8100/">PPI Calc</a></li>
+                <li class="divider"></li>
+                <li><a href="#">---</a></li>
+                <li class="divider"></li>
+                <li><a href="#">---</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Park <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Kang</a></li>
+          </ul>
+          
+          <!-- 검색창-->
+          <!--  <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="내용을 입력하세요">
+            </div>
+            <button type="submit" class="btn btn-default">검색</button>
+          </form>-->
+          
+        </div>
+      </div>
+    </nav>
+    
+	<!-- 디바이스 선택하는 부분 -->
+	<style>
+		.btn{
+			background-color: #ffffff;
+			border: none;
+		}
+	</style>
+    <div class="container-fluid-product">
+    
+		<h4>제품을 선택해주세요 </h4>
+		<div class="col-sm-2 container-fluid"><span></span></div>
+    	<div class="col-sm-2" onclick="getBtnValue('p')"><button class="btn" id="btn-p" type="submit">
+    		<img class="btn-img " src="images/smartphone.png"></button></div>
+    	<div class="col-sm-2" onclick="getBtnValue('t')"><button class="btn" id="btn-p" type="submit">
+    		<img class="btn-img" src="images/tablet.png"></button></div>
+    	<div class="col-sm-2" onclick="getBtnValue('l')"><button class="btn" id="btn-p" type="submit">
+    		<img class="btn-img" src="images/laptop.png"></button></div>
+    	<div class="col-sm-2" onclick="getBtnValue('m')"><button class="btn" id="btn-p" type="submit">
+    		<img class="btn-img" src="images/moniter.png"></button></div>
+    	<div class="col-sm-2 container-fluid"><span></span></div>
+    	
+    </div>
+    <!-- 입력 및 결과 출력하는 부분 -->
+    <div class="container-fluid-result">
+    <!-- 해상도 및 인치 입력 부분 -->
+    	<div class="row container-fluid">
+	    	<div class="col-sm-2 container-fluid"><span></span></div>
+	    	<div class="col-sm-4" id="entry_box">
+	    		<h4>디스플레이의 정보를 입력해주세요</h4>
+	    		<p><p>
+	    		<form name="dpiCalculator" method="get">
+						<table class="col-sm-12">
+							<tr>
+								<td>수평 픽셀<br/>
+								<input id = "resolutionHorizen" name="x" size="8" onkeyup="dpiCalc(this.form)" type="text" maxlength="7"/></td>
+							</tr>
+							<tr>	
+								<td>수직 픽셀<br>
+								<input id = "resolutionVertical" name="y" size="8" onkeyup="dpiCalc(this.form)" type="text" maxlength="7"></td>
+							</tr>
+							<tr>
+								<td>인치(<span id="zMetric">...</span>cm)<br/>
+								<input id = "inchInput" name="z" size="8" onkeyup="dpiCalc(this.form)" type="text" maxlength="7"> 
+							</tr>	
+						</table>
+				</form>
+	    		<p>
+	    	
+	    	</div>
+	    	<!-- ppi점수 출력 부분 -->
+	    	<div class="col-sm-4">
+				<div class="container-fluid" id="resultimg">
+					<img src="images/showppi.png" class="img-responsive">
+					<div class="carousel-caption" id="resultppi">
+						<h4>당신의 PPI점수는</h4>
+						<h4><span id="dpi">0</span>점 입니다.</h4>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-2 container-fluid"><span></span></div>
+		</div>
+		
+		<!-- 서브적인 설명이 들어간 부분 -->
+		<div class="container-fulid" id=subinfo>
+			<br><h4>"<span id="strCompareDevice">...</span>" 보다
+					<span id="strCompareRemain">0</span>점
+					<span id="strCompareHeightLow">...</span>습니다.</h4>
+			<h5>PPI는 Pixels Per Inch의 약자로서 해상도의 밀도 단위이다.</h5><p>
+			도트 간격: <span id="dotPitch">0</span><br/>
+			사이즈: <span id="displaySize">0</span> (<span id="displaySizeMetric">0</span>)<br/>
+			화면비: <span id="aspectRatioFraction">0</span> (<span id="aspectRatio">0</span>)<br/>
+			픽셀 수: <span id="pixelCount">0</span> <br/>
+		</div>
+		
+	</div>
+
+    <div class="container-fluid-show">
+    
+    <!-- 랭킹이 나오는 부분 -->
+    	<div class="col-sm-2 container-fluid"><span></span></div>
+    	<div class="col-sm-4">
+    		<h4>"<span id="strProduct">...</span>" TOP10 PPI랭킹</h4><p>
+    		<h5><span id="strRank">...</span></h5>
+    	</div>
+    	
+    	<!-- 시각적 출력 해주는 부분 -->
+    	<div class="col-sm-4">
+    		<h4>디스플레이 데이터베이스</h4>
+    		<h5>해상도를 선택하세요</h5>
+			<select name="resolution" id="resolution" onchange="setResolutionBox()">
+				<option selected disabled>-------------- 선택하세요 -------------</option>
+				<option value="1280x720">1280x720 HDTV, 720p</option>
+				<option value="1280x1024">1280x1024 SXGA</option>
+				<option value="1366x768">1366x768 HD</option>
+				<option value="1600x900">1600x900 HD+, 900p</option>
+				<option value="1680x1050">1680x1050 WSXGA+</option>
+				<option value="1920x1080">1920x1080 HDTV 1080, FullHD, 1080p</option>
+				<option value="1920x1200">1920x1200 WUXGA</option>
+				<option value="2560x1440">2560x1440 WQHD, 1440p</option>
+				<option value="2560x1600">2560x1600 WQXGA</option>
+				<option value="3840x2160">3840x2160 QFHD, 4K, UltraHD, UHD-1</option>
+				<option value="5120x2880">5120x2880 5K</option>
+			</select>
+			
+			<p>
+			
+			<h5>인치를 선택하세요</h5>
+			<select name="inch" id="inch" onchange="setInchBox()">
+				<option selected disabled>-- 선택하세요 --</option>			
+				<option value="9.7">9.7 inch</option>
+				<option value="15.6">15.6 inch</option>
+				<option value="17">17 inch</option>
+				<option value="21.5">21.5 inch</option>
+				<option value="24">24 inch</option>
+				<option value="27">27 inch</option>
+				<option value="32">32 inch</option>
+				<option value="42">42 inch</option>
+			</select>
+			
+		</div>
+		<div class="col-sm-2 container-fluid"><span></span></div>
+	</div>
+    
+    <!-- 푸터 부분 -->
+    <footer style="background-color: #F2F2F2"; border-color: border-color: #CFCFCF;>
+    <div class="container">
+    	<p>
+    	<div class="col-sm-12" style="text-align: center;">@2019 Copyright <p>
+    	&copy; Junseo Park(박준서) Eunho Kang(강은호)<p> </div>    	
+    </div>
+    
+    </footer> 
+    
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+       
+	</body>
+</html>
