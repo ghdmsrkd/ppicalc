@@ -1,0 +1,35 @@
+1280x720 HDTV, 720p
+1280x1024 SXGA
+1366x768 HD
+1600x900 HD+, 900p
+1680x1050 WSXGA+
+1920x1080 HDTV 1080, FullHD, 1080p
+1920x1200 WUXGA
+2560x1440 WQHD, 1440p
+2560x1600 WQXGA
+3840x2160 QFHD, 4K, UltraHD, UHD-1
+5120x2880 5K
+
+
+9.7 15.6 17 21.5 24 27 32 42
+
+<option value="1280x720">1280x720 HDTV, 720p</option>
+<option value="1280x1024">1280x1024 SXGA</option>
+<option value="1366x768">1366x768 HD</option>
+<option value="1600x900">1600x900 HD+, 900p</option>
+<option value="1680x1050">1680x1050 WSXGA+</option>
+<option value="1920x1080">1920x1080 HDTV 1080, FullHD, 1080p</option>
+<option value="1920x1200">1920x1200 WUXGA</option>
+<option value="2560x1440">2560x1440 WQHD, 1440p</option>
+<option value="2560x1600">2560x1600 WQXGA</option>
+<option value="3840x2160">3840x2160 QFHD, 4K, UltraHD, UHD-1</option>
+<option value="5120x2880">5120x2880 5K</option>
+
+<option value="9.7">9.7inch</option>
+<option value="15.6">15.6inch</option>
+<option value="17">17inch</option>
+<option value="21.5">21.5inch</option>
+<option value="24">24inch</option>
+<option value="27">27inch</option>
+<option value="32">32inch</option>
+<option value="42">42inch</option>

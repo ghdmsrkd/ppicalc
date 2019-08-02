@@ -1,0 +1,4 @@
+iphone xr 6.1  1792  828	326
+ipad pro 12.9 2732 2048	264
+macbook pro 15 1920 1200	227
+imac pro 27 5120 2880	218

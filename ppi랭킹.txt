@@ -1,0 +1,76 @@
+스마트폰
+1.	Sony Xperia XZ Premium	806.93
+2.	Sony Xperia Z5 Premium	801.06
+3.	Samsung Galaxy S6		575.92
+4.	Samsung Galaxy S6 Edge	575.92
+5.	Samsung Galaxy S7		575.92
+6.	Samsung Galaxy S8		567.53
+7.	Samsung Galaxy S9		567.53
+8.	LG G6	564.90
+9.	Microsoft Lumia 950		564.85
+10.	HTC 10	564.85
+
+
+테블릿
+1.	Samsung Galaxy Tab Pro 8.4	359.39
+2.	Samsung Galaxy Tab S 8.4	359.39
+3.	Dell Venue 8 7840	2015	359.39
+4.	Dell Latitude 12 7000 (7275)	352.47
+5.	Amazon Kindle Fire HDX 8.9″	339.20
+6.	Apple iPad Mini (2nd Generation)	324.05
+7.	Google Nexus 7 (2013)	323.45
+8.	Amazon Kindle Fire HDX	323.45
+9.	Samsung Galaxy Tab S2 8.0	320.00
+10.	Asus ZenPad S 8.0	320.00
+
+
+랩탑
+1.	HP EliteBook Folio G1 (Skylake 4K)	352.47
+2.	Dell Latitude 12 7000 (7275)		352.47
+3.	Dell XPS 13 (9370)		331.26
+4.	Lenovo Yoga 920		316.97
+5.	Lenovo Miix 720	288.44
+6.	Toshiba Satellite P55t	282.42
+7.	Dell Precision 5520	282.42
+8.	Lenovo X1 Extreme (4K)	282.42
+9.	Samsung ATIV Book 9 Plus	276.05
+10.	Samsung ATIV Q	276.05
+
+
+모니터
+1.	Dell UP3218K	279.73
+2.	LG UltraFine 4K Display	218.58
+3.	Dell UltraSharp 27 Ultra HD 5K Monitor	217.57
+4.	LG UltraFine 5K Display	217.57
+5.	HP Z27q	217.57
+6.	Dell UP2715K	217.57
+7.	IBM T221	2001	203.98
+8.	Viewsonic VP2290b	203.98
+9.	Microsoft Surface Studio	193.15
+10.	Dell UP2414Q	183.58
+
+
+스마트폰
+806.93   Sony Xperia XZ Premium<br/>801.06   Sony Xperia Z5 Premium<br/>575.92   Samsung Galaxy S6<br/>75.92   Samsung Galaxy S6 Edge<br/>575.92   Samsung Galaxy S7<br/>567.53   Samsung Galaxy S8<br/>567.53   Samsung Galaxy S9<br/>564.90   LG G6<br/>564.85   Microsoft Lumia 950<br/>564.85   HTC 10';
+
+테블릿
+359.39	Samsung Galaxy Tab Pro 8.4<br/>359.39	Samsung Galaxy Tab S 8.4<br/>359.39	Dell Venue 8 7840<br/>352.47	Dell Latitude 12 7000 (7275)<br/>339.20	Amazon Kindle Fire HDX 8.9″<br/>324.05	Apple iPad Mini (2nd Generation)<br/>323.45	Google Nexus 7 (2013)<br/>323.45	Amazon Kindle Fire HDX<br/>320.00	Samsung Galaxy Tab S2 8.0<br/>320.00	Asus ZenPad S 8.0<br/>
+
+
+랩탑
+352.47	HP EliteBook Folio G1 (Skylake 4K)<br/>352.47	Dell Latitude 12 7000 (7275)<br/>331.26	Dell XPS 13 (9370)<br/>316.97	Lenovo Yoga 920<br/>288.44	Lenovo Miix 720<br/>282.42	Toshiba Satellite P55t<br/>282.42	Dell Precision 5520<br/>282.42	Lenovo X1 Extreme (4K)<br/>276.05	Samsung ATIV Book 9 Plus<br/>276.05	Samsung ATIV Q<br/>
+
+모니터
+279.73	Dell UP3218K<br/>	218.58	LG UltraFine 4K Display<br/>	217.57	Dell UltraSharp 27 Ultra HD 5K Monitor<br/>	217.57	LG UltraFine 5K Display<br/>	217.57	HP Z27q<br/>	217.57	Dell UP2715K<br/>	203.98	IBM T221	2001<br/>	203.98	Viewsonic VP2290b<br/>	193.15	Microsoft Surface Studio<br/>	183.58	Dell UP2414Q	
+
+
+
+
+
+
+
+
+
+
+
+
