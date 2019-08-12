@@ -281,28 +281,28 @@
     <div class="container-fluid-product">
     
 		<h4>제품을 선택해주세요 </h4>
-		<div class="col-sm-2 container-fluid"><span></span></div>
-    	<div class="col-sm-2" onclick="getBtnValue('p')"><button class="btn" id="btn-p" type="submit">
+		<div class="col-sm-2 col-lg-4 col-xs-1 col-md-2 container-fluid"><span></span></div>
+    	<div class="col-sm-2 col-lg-1 col-xs-2 col-md-2" onclick="getBtnValue('p')"><button class="btn" id="btn-p" type="submit">
     		<img class="btn-img " src="images/smartphone.png"></button></div>
-    	<div class="col-sm-2" onclick="getBtnValue('t')"><button class="btn" id="btn-p" type="submit">
+    	<div class="col-sm-2 col-lg-1 col-xs-2 col-md-2" onclick="getBtnValue('t')"><button class="btn" id="btn-p" type="submit">
     		<img class="btn-img" src="images/tablet.png"></button></div>
-    	<div class="col-sm-2" onclick="getBtnValue('l')"><button class="btn" id="btn-p" type="submit">
+    	<div class="col-sm-2 col-lg-1 col-xs-3 col-md-2" onclick="getBtnValue('l')"><button class="btn" id="btn-p" type="submit">
     		<img class="btn-img" src="images/laptop.png"></button></div>
-    	<div class="col-sm-2" onclick="getBtnValue('m')"><button class="btn" id="btn-p" type="submit">
+    	<div class="col-sm-3 col-lg-2 col-xs-3 col-md-3" onclick="getBtnValue('m')"><button class="btn" id="btn-p" type="submit">
     		<img class="btn-img" src="images/moniter.png"></button></div>
-    	<div class="col-sm-2 container-fluid"><span></span></div>
+    	<div class="col-sm-1 col-lg-3 col-xs-1 col-md-1 container-fluid"><span></span></div>
     	
     </div>
     <!-- 입력 및 결과 출력하는 부분 -->
     <div class="container-fluid-result">
     <!-- 해상도 및 인치 입력 부분 -->
     	<div class="row container-fluid">
-	    	<div class="col-sm-2 container-fluid"><span></span></div>
-	    	<div class="col-sm-4" id="entry_box">
+	    	<div class="col-xs-1 col-sm-2 container-fluid"><span></span></div>
+	    	<div class="col-xs-4 col-sm-4" id="entry_box">
 	    		<h4>디스플레이의 정보를 입력해주세요</h4>
 	    		<p><p>
-	    		<form name="dpiCalculator" method="get">
-						<table class="col-sm-12">
+	    		<form name="dpiCalculator" method="get" >
+						<table class="container-fluid">
 							<tr>
 								<td>수평 픽셀<br/>
 								<input id = "resolutionHorizen" name="x" size="8" onkeyup="dpiCalc(this.form)" type="text" maxlength="7"/></td>
@@ -321,7 +321,7 @@
 	    	
 	    	</div>
 	    	<!-- ppi점수 출력 부분 -->
-	    	<div class="col-sm-4">
+	    	<div class="col-xs-2 col-sm-4">
 				<div class="container-fluid" id="resultimg">
 					<img src="images/showppi.png" class="img-responsive">
 					<div class="carousel-caption" id="resultppi">
@@ -331,7 +331,7 @@
 				</div>
 			</div>
 			
-			<div class="col-sm-2 container-fluid"><span></span></div>
+			<div class="col-xs-4 col-sm-2 container-fluid"><span></span></div>
 		</div>
 		
 		<!-- 서브적인 설명이 들어간 부분 -->
@@ -351,14 +351,14 @@
     <div class="container-fluid-show">
     
     <!-- 랭킹이 나오는 부분 -->
-    	<div class="col-sm-2 container-fluid"><span></span></div>
-    	<div class="col-sm-4">
+    	<div class="col-xs-1 col-sm-2 container-fluid"><span></span></div>
+    	<div class="col-xs-5 col-sm-4">
     		<h4>"<span id="strProduct">...</span>" TOP10 PPI랭킹</h4><p>
     		<h5><span id="strRank">...</span></h5>
     	</div>
-    	
+    	<br/>
     	<!-- 시각적 출력 해주는 부분 -->
-    	<div class="col-sm-4">
+    	<div class="col-xs-5 col-sm-4">
     		<h4>디스플레이 데이터베이스</h4>
     		<h5>해상도를 선택하세요</h5>
 			<select name="resolution" id="resolution" onchange="setResolutionBox()">
@@ -376,7 +376,6 @@
 				<option value="5120x2880">5120x2880 5K</option>
 			</select>
 			
-			<p>
 			
 			<h5>인치를 선택하세요</h5>
 			<select name="inch" id="inch" onchange="setInchBox()">
@@ -392,7 +391,7 @@
 			</select>
 			
 		</div>
-		<div class="col-sm-2 container-fluid"><span></span></div>
+		<div class="col-xs-1 col-sm-2 container-fluid"><span></span></div>
 	</div>
     
     <!-- 푸터 부분 -->
